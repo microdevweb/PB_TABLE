@@ -16,6 +16,8 @@ DeclareModule _TB
     bg.l
   EndStructure
   Declare.s concatene(text.s,widht.l)
+  Declare.f dpiX(Num.d)
+  Declare.f dpiY(Num.d)
 EndDeclareModule
 
 DeclareModule _COLUMN
@@ -181,11 +183,19 @@ Module _TB
     Wend
     ProcedureReturn  v
   EndProcedure
+  
+  Procedure.f dpiX(Num.d)
+    ProcedureReturn DesktopScaledX(Num)
+  EndProcedure
+  
+  Procedure.f dpiY(Num.d)
+    ProcedureReturn DesktopScaledY(Num)
+  EndProcedure
 EndModule
 
 
 ; IDE Options = PureBasic 5.72 LTS Beta 1 (Windows - x64)
-; CursorPosition = 50
-; FirstLine = 27
-; Folding = Yf--h
+; CursorPosition = 74
+; FirstLine = 45
+; Folding = Zf--6-
 ; EnableXP

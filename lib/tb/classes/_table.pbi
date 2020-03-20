@@ -53,21 +53,25 @@ Module _TABLE
 			\selectedLineFont = TB::defaultFont\selectedFont
 			\container = container
 			\columnTitleHeight = TB::defaultSize\column_height
-			\idCanvas = CanvasGadget(#PB_Any,0,0,GadgetWidth(\container),GadgetHeight(\container),#PB_Canvas_Keyboard|#PB_Canvas_Container)
+			Protected w = GadgetWidth(\container),
+			         h = GadgetHeight(\container)
+			w = _TB::dpiX(w)
+			h = _TB::dpiY(h)
+			\idCanvas = CanvasGadget(#PB_Any,0,0,w,h,#PB_Canvas_Keyboard|#PB_Canvas_Container)
 			SetGadgetData(\idCanvas,*this)
-			\scrollV = ScrollBarGadget(#PB_Any,GadgetWidth(\idCanvas) - TB::defaultSize\scroll_size,0,
-			                           TB::defaultSize\scroll_size,GadgetHeight(\idCanvas) - TB::defaultSize\scroll_size,0,0,20,#PB_ScrollBar_Vertical)
+			\scrollV = ScrollBarGadget(#PB_Any,w - TB::defaultSize\scroll_size,0,
+			                           TB::defaultSize\scroll_size,h - TB::defaultSize\scroll_size,0,0,20,#PB_ScrollBar_Vertical)
 			SetGadgetData(\scrollV,*this)
 			BindGadgetEvent(\scrollV,@eventScrollV())
 			HideGadget(\scrollV,#True)
-			\scrollH = ScrollBarGadget(#PB_Any,0,GadgetHeight(\idCanvas) - TB::defaultSize\scroll_size,
-			                           GadgetWidth(\idCanvas) - TB::defaultSize\scroll_size,TB::defaultSize\scroll_size,
+			\scrollH = ScrollBarGadget(#PB_Any,0,h - TB::defaultSize\scroll_size,
+			                           w - TB::defaultSize\scroll_size,TB::defaultSize\scroll_size,
 			                           0,0,20)
 			SetGadgetData(\scrollH,*this)
 			HideGadget(\scrollH,#True)
 			BindGadgetEvent(\scrollH,@eventScrollH())
 			CloseGadgetList()
-			\image = CreateImage(#PB_Any,GadgetWidth(\idCanvas),GadgetHeight(\idCanvas))
+			\image = CreateImage(#PB_Any,w,h)
 			makeLines(*this)
 			BindGadgetEvent(\idCanvas,@eventCanvas())
 			ProcedureReturn *this
@@ -480,7 +484,7 @@ Module _TABLE
 	EndDataSection
 EndModule
 ; IDE Options = PureBasic 5.72 LTS Beta 1 (Windows - x64)
-; CursorPosition = 136
-; FirstLine = 79
+; CursorPosition = 67
+; FirstLine = 33
 ; Folding = yYCCAV6
 ; EnableXP
