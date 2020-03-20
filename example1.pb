@@ -1,5 +1,5 @@
 ﻿XIncludeFile "include/tb/tb.pbi"
-
+UsePNGImageDecoder()
 Enumeration 
   #FORM
   #CONTAINER
@@ -17,9 +17,13 @@ Structure person
   age.l
   size.f
   weight.d
+  icon.l
 EndStructure
 
-Global NewList myPeople.person()
+Global NewList myPeople.person(),
+               img_warning = CatchImage(#PB_Any,?war),
+               img_phone = CatchImage(#PB_Any,?phone),  
+               img_busnes = CatchImage(#PB_Any,?bus)
 
 
 Procedure.s getFirstName(*this.person)
@@ -87,6 +91,12 @@ Procedure setWeight(*this.person,value.d)
   EndWith
 EndProcedure
 
+Procedure getIcon(*this.person)
+  With *this
+    ProcedureReturn \icon
+  EndWith
+EndProcedure
+
 Procedure exit()
   End
 EndProcedure
@@ -99,6 +109,7 @@ Procedure makeData(table.TB::table)
     \age = 55
     \size = 175.10
     \weight = 80.623
+    \icon = img_busnes
     table\addLine(@myPeople())
     AddElement(myPeople())
     \firstName = "André"
@@ -106,6 +117,7 @@ Procedure makeData(table.TB::table)
     \age = 48
     \size = 165.25
     \weight = 70.428
+    \icon = img_warning
     table\addLine(@myPeople())
     AddElement(myPeople())
     \firstName = "Paul"
@@ -113,6 +125,7 @@ Procedure makeData(table.TB::table)
     \age = 49
     \size = 170.388
     \weight = 90.758
+    \icon = img_phone
     table\addLine(@myPeople())
     AddElement(myPeople())
     \firstName = "Eric"
@@ -145,7 +158,8 @@ EndProcedure
 
 Procedure start()
   Protected table.TB::table,y = 10
-  Protected *cs.TB::stringColumn,*ci.TB::integerColumn,*cf.TB::floatColumn,*cd.TB::doubleColumn
+  Protected *cs.TB::stringColumn,*ci.TB::integerColumn,*cf.TB::floatColumn,*cd.TB::doubleColumn,
+            *cc.TB::imageColumn
   OpenWindow(#FORM,0,0,800,600,"Example version 1.0.b3",#PB_Window_ScreenCentered|#PB_Window_SystemMenu)
   ContainerGadget(#CONTAINER,10,10,400,580)
   table = TB::newTable(#CONTAINER)
@@ -160,6 +174,8 @@ Procedure start()
   *cf\setEditable(@setSize())
   *cd = table\addColumn(TB::newDoubleColumn("Weight",0.2,@getWeight()))
   *cd\setEditable(@setWeight())
+  *cc = table\addColumn(TB::newImageColumn("Status",0.2,@getIcon()))
+  *cc\setSize(0.6)
   makeData(table)
   table\setSelectCallback(@fillFic())
   table\show()
@@ -192,8 +208,17 @@ start()
 
 Repeat :WaitWindowEvent():ForEver
 
+DataSection
+  war:
+  IncludeBinary "images/warning.png"
+  phone:
+  IncludeBinary "images/phone.png"
+  bus:
+  IncludeBinary "images/busnes.png"
+EndDataSection
+
 ; IDE Options = PureBasic 5.72 LTS Beta 1 (Windows - x64)
-; CursorPosition = 85
-; FirstLine = 71
-; Folding = -f+
+; CursorPosition = 111
+; FirstLine = 92
+; Folding = --+
 ; EnableXP

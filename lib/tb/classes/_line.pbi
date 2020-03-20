@@ -57,11 +57,23 @@ Module _LINE
 	    ForEach *p\myColumns()
 	      wc = GadgetWidth(*p\idCanvas) * *p\myColumns()\width
 	      If \data
-	        VectorSourceColor(cf)
-	        text = _COLUMN::_getValue(*p\myColumns(),\data)
-	        yc = \y + ((*p\lineHeight / 2) - (VectorTextHeight(text) / 2))
-	        MovePathCursor(x+8,yc)
-	        DrawVectorParagraph(text,wc - 16,VectorTextHeight(text))
+	        If Not *p\myColumns()\image ; string, integer double float
+	          VectorSourceColor(cf)
+	          text = _COLUMN::_getValue(*p\myColumns(),\data)
+	          yc = \y + ((*p\lineHeight / 2) - (VectorTextHeight(text) / 2))
+	          MovePathCursor(x+8,yc)
+	          DrawVectorParagraph(text,wc - 16,VectorTextHeight(text))
+	        Else ; image
+	          Protected *c._IMAGE_COLUMN::_members = *p\myColumns(),
+	                    s.d = *p\lineHeight * *c\size,
+	                    yi = \y +((*p\lineHeight / 2) - (s / 2)),
+	                    xi = x + ((wc / 2) - (s/2)),img = Val(_COLUMN::_getValue(*p\myColumns(),\data))
+	          If IsImage(img)
+	            MovePathCursor(xi,yi)
+	            DrawVectorImage(ImageID(img),255,s,s)
+	          EndIf
+	          
+	        EndIf
 	      EndIf
 	      VectorSourceColor(*p\colors\fg)
 	      MovePathCursor(x + wc,\y)
@@ -110,7 +122,7 @@ Module _LINE
 	EndDataSection
 EndModule
 ; IDE Options = PureBasic 5.72 LTS Beta 1 (Windows - x64)
-; CursorPosition = 32
-; FirstLine = 23
+; CursorPosition = 67
+; FirstLine = 55
 ; Folding = --
 ; EnableXP

@@ -34,6 +34,7 @@ DeclareModule _COLUMN
 	  id.l
 	  *data
 	  *parent
+	  image.b
 	EndStructure
 	Declare _super(*this._members,*s_daughter,*E_daughter)
 	Macro super()
@@ -41,6 +42,19 @@ DeclareModule _COLUMN
 	EndMacro
 	Declare _drawTitle(*this._members,x,*parent)
 	Declare.s _getValue(*this._members,*data)
+EndDeclareModule
+
+DeclareModule _IMAGE_COLUMN
+  Prototype geter(*this)
+  Structure _members Extends _COLUMN::_members
+    *geter.geter
+    size.d
+	EndStructure
+	Declare _super(*this._members,*s_daughter,*E_daughter)
+	Macro super()
+		_IMAGE_COLUMN::_super(*this,?S_MET,?E_MET)
+	EndMacro
+	Declare new(title.s,width.d,*geter)
 EndDeclareModule
 
 DeclareModule _STRING_COLUMN
@@ -171,7 +185,7 @@ EndModule
 
 
 ; IDE Options = PureBasic 5.72 LTS Beta 1 (Windows - x64)
-; CursorPosition = 35
-; FirstLine = 12
-; Folding = Y8-P9
+; CursorPosition = 50
+; FirstLine = 27
+; Folding = Yf--h
 ; EnableXP

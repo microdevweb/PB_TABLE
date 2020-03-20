@@ -81,11 +81,18 @@ DeclareModule TB
     setNumberDecimal(number)
     setEditable(seter)
   EndInterface
+  Interface imageColumn Extends _column
+    getGeter()
+    setGeter(geter)
+    getSize()
+    setSize(size.d)
+  EndInterface
   Declare newTable(container)
   Declare newStringColumn(title.s,width.d,*getter)
   Declare newIntegerColumn(title.s,width.d,*getter)
   Declare newFloatColumn(title.s,width.d,*getter,numberDecimal = 2)
   Declare newDoubleColumn(title.s,width.d,*getter,numberDecimal = 2)
+  Declare newImageColumn(title.s,width.d,*getter)
 EndDeclareModule
 Module TB
   With defaultColors
@@ -129,10 +136,13 @@ Module TB
   Procedure newDoubleColumn(title.s,width.d,*getter,numberDecimal = 2)
     ProcedureReturn _DOUBLE_COLUMN::new(title,width,*getter,numberDecimal)
   EndProcedure
+  Procedure newImageColumn(title.s,width.d,*getter)
+    ProcedureReturn _IMAGE_COLUMN::new(title,width,*getter)
+  EndProcedure
 EndModule
 XIncludeFile "../../lib/tb/_tb_classes.pbi"
 ; IDE Options = PureBasic 5.72 LTS Beta 1 (Windows - x64)
-; CursorPosition = 80
-; FirstLine = 41
-; Folding = Z-
+; CursorPosition = 100
+; FirstLine = 57
+; Folding = 6-
 ; EnableXP
