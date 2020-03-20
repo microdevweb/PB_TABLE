@@ -42,6 +42,40 @@ DeclareModule TB
     setTitleBgColors(color)
     getTitleFgColors()
     setTitleFgColors(color)
+    
+    getBgPairColors()
+    setBgPairColors(color)
+    getFgPairColors()
+    setFgPairColors(color)
+    
+    getBgDootColors()
+    setBgDootColors(color)
+    getFgDootColors()
+    setFgDootColors(color)
+    
+    getBgSelectedColors()
+    setBgSelectedColors(color)
+    getFgSelectedColors()
+    setFgSelectedColors(color)
+    
+    getTitleFont()
+    setTitleFont(font)
+    
+    getTitleHeight()
+    setTitleHeight(height)
+    
+    getLineHeight()
+    setLineHeight(height)
+    
+    getLineFont()
+    setLineFont(font)
+    
+    getSelectedLineFont()
+    setSelectedLineFont(font)
+    
+    getColumnTitleHeight()
+    setColumnTitleHeight(height)
+    
     show()
     addColumn(column)
     addLine(lineData)
@@ -142,7 +176,7 @@ Module TB
 EndModule
 XIncludeFile "../../lib/tb/_tb_classes.pbi"
 ; IDE Options = PureBasic 5.72 LTS Beta 1 (Windows - x64)
-; CursorPosition = 100
-; FirstLine = 57
+; CursorPosition = 76
+; FirstLine = 45
 ; Folding = 6-
 ; EnableXP

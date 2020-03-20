@@ -160,7 +160,7 @@ Procedure start()
   Protected table.TB::table,y = 10
   Protected *cs.TB::stringColumn,*ci.TB::integerColumn,*cf.TB::floatColumn,*cd.TB::doubleColumn,
             *cc.TB::imageColumn
-  OpenWindow(#FORM,0,0,800,600,"Example version 1.0.b3",#PB_Window_ScreenCentered|#PB_Window_SystemMenu)
+  OpenWindow(#FORM,0,0,800,600,"Example version 1.0.b6",#PB_Window_ScreenCentered|#PB_Window_SystemMenu)
   ContainerGadget(#CONTAINER,10,10,400,580)
   table = TB::newTable(#CONTAINER)
   table\setTitle("List of customer")
@@ -218,7 +218,7 @@ DataSection
 EndDataSection
 
 ; IDE Options = PureBasic 5.72 LTS Beta 1 (Windows - x64)
-; CursorPosition = 111
-; FirstLine = 92
+; CursorPosition = 162
+; FirstLine = 144
 ; Folding = --+
 ; EnableXP

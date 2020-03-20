@@ -395,6 +395,153 @@ Module _TABLE
 	    \titleColors\fg = color
 	  EndWith
 	EndProcedure
+	
+	Procedure getBgPairColors(*this._members)
+	  With *this
+	    ProcedureReturn \pairColors\bg
+	  EndWith
+	EndProcedure
+	
+	Procedure setBgPairColors(*this._members,color)
+	  With *this
+	    \pairColors\bg = color
+	  EndWith
+	EndProcedure
+
+  Procedure getFgPairColors(*this._members)
+	  With *this
+	    ProcedureReturn \pairColors\fg
+	  EndWith
+	EndProcedure
+	
+	Procedure setFgPairColors(*this._members,color)
+	  With *this
+	    \pairColors\fg = color
+	  EndWith
+	EndProcedure
+	
+	Procedure getBgDootColors(*this._members)
+	  With *this
+	    ProcedureReturn \dootColors\bg
+	  EndWith
+	EndProcedure
+	
+	Procedure setBgDootColors(*this._members,color)
+	  With *this
+	    \dootColors\bg = color
+	  EndWith
+	EndProcedure
+
+  Procedure getFgDootColors(*this._members)
+	  With *this
+	    ProcedureReturn \dootColors\fg
+	  EndWith
+	EndProcedure
+	
+	Procedure setFgDootColors(*this._members,color)
+	  With *this
+	    \dootColors\fg = color
+	  EndWith
+	EndProcedure
+	
+	Procedure getBgSelectedColors(*this._members)
+	  With *this
+	    ProcedureReturn \selectedColors\bg
+	  EndWith
+	EndProcedure
+	
+	Procedure setBgSelectedColors(*this._members,color)
+	  With *this
+	    \selectedColors\bg = color
+	  EndWith
+	EndProcedure
+
+  Procedure getFgSelectedColors(*this._members)
+	  With *this
+	    ProcedureReturn \selectedColors\fg
+	  EndWith
+	EndProcedure
+	
+	Procedure setFgSelectedColors(*this._members,color)
+	  With *this
+	    \selectedColors\fg = color
+	  EndWith
+	EndProcedure
+	
+	Procedure getTitleFont(*this._members)
+	  With *this
+	    ProcedureReturn \titleFont
+	  EndWith
+	EndProcedure
+	
+	Procedure setTitleFont(*this._members,titleFont)
+	  With *this
+	    \titleFont = titleFont
+	  EndWith
+	EndProcedure
+	
+	Procedure getTitleHeight(*this._members)
+	  With *this
+	    ProcedureReturn \titleHeight
+	  EndWith
+	EndProcedure
+	
+	Procedure setTitleHeight(*this._members,height)
+	  With *this
+	    \titleHeight = height
+	  EndWith
+	EndProcedure
+
+	Procedure getLineHeight(*this._members)
+	  With *this
+	    ProcedureReturn \lineHeight
+	  EndWith
+	EndProcedure
+	
+	Procedure setLineHeight(*this._members,height)
+	  With *this
+	    \lineHeight = height
+	  EndWith
+	EndProcedure
+	
+	Procedure getLineFont(*this._members)
+	  With *this
+	    ProcedureReturn \lineFont
+	  EndWith
+	EndProcedure
+	
+	Procedure setLineFont(*this._members,font)
+	  With *this
+	    \lineFont = font
+	  EndWith
+	EndProcedure
+
+	Procedure getSelectedLineFont(*this._members)
+	  With *this
+	    ProcedureReturn \selectedLineFont
+	  EndWith
+	EndProcedure
+	
+	Procedure setSelectedLineFont(*this._members,font)
+	  With *this
+	    \selectedLineFont = font
+	  EndWith
+	EndProcedure
+
+	Procedure getColumnTitleHeight(*this._members)
+	  With *this
+	    ProcedureReturn \columnTitleHeight
+	  EndWith
+	EndProcedure
+	
+	Procedure setColumnTitleHeight(*this._members,height)
+	  With *this
+	    \columnTitleHeight = height
+	  EndWith
+	EndProcedure
+
+
+
 
 	;}
 	
@@ -476,6 +623,40 @@ Module _TABLE
     Data.i @getTitleFgColors()
     Data.i @setTitleFgColors()
     
+    Data.i @getBgPairColors()
+    Data.i @setBgPairColors()
+    Data.i @getFgPairColors()
+    Data.i @setFgPairColors()
+    
+    Data.i @getBgDootColors()
+    Data.i @setBgDootColors()
+    Data.i @getFgDootColors()
+    Data.i @setFgDootColors()
+    
+    Data.i @getBgSelectedColors()
+    Data.i @setBgSelectedColors()
+    Data.i @getFgSelectedColors()
+    Data.i @setFgSelectedColors()
+    
+    Data.i @getTitleFont()
+    Data.i @setTitleFont()
+    
+    Data.i @getTitleHeight()
+    Data.i @setTitleHeight()
+
+    Data.i @getLineHeight()
+    Data.i @setLineHeight()
+    
+    Data.i @getLineFont()
+    Data.i @setLineFont()
+    
+    Data.i @getSelectedLineFont()
+    Data.i @setSelectedLineFont()
+
+    Data.i @getColumnTitleHeight()
+    Data.i @setColumnTitleHeight()
+
+    
     Data.i @show()
     Data.i @addColumn()
     Data.i @addLine()
@@ -484,7 +665,7 @@ Module _TABLE
 	EndDataSection
 EndModule
 ; IDE Options = PureBasic 5.72 LTS Beta 1 (Windows - x64)
-; CursorPosition = 67
-; FirstLine = 33
-; Folding = yYCCAV6
+; CursorPosition = 656
+; FirstLine = 197
+; Folding = CAAgA7---A9
 ; EnableXP
