@@ -18,6 +18,7 @@ Structure person
   size.f
   weight.d
   icon.l
+  info.s
 EndStructure
 
 Global NewList myPeople.person(),
@@ -97,6 +98,12 @@ Procedure getIcon(*this.person)
   EndWith
 EndProcedure
 
+Procedure.s getInfo(*this.person) 
+  With *this
+    ProcedureReturn \info
+  EndWith
+EndProcedure
+
 Procedure exit()
   End
 EndProcedure
@@ -110,6 +117,7 @@ Procedure makeData(table.TB::table)
     \size = 175.10
     \weight = 80.623
     \icon = img_busnes
+    \info = "New Customer"
     table\addLine(@myPeople())
     AddElement(myPeople())
     \firstName = "André"
@@ -118,6 +126,7 @@ Procedure makeData(table.TB::table)
     \size = 165.25
     \weight = 70.428
     \icon = img_warning
+    \info = "This customer has"+Chr(10)+"order out"
     table\addLine(@myPeople())
     AddElement(myPeople())
     \firstName = "Paul"
@@ -126,6 +135,7 @@ Procedure makeData(table.TB::table)
     \size = 170.388
     \weight = 90.758
     \icon = img_phone
+    \info = "Call him"+Chr(10)+"next week"+Chr(10)+"On his office phone"
     table\addLine(@myPeople())
     AddElement(myPeople())
     \firstName = "Eric"
@@ -176,6 +186,7 @@ Procedure start()
   *cd\setEditable(@setWeight())
   *cc = table\addColumn(TB::newImageColumn("Status",0.2,@getIcon()))
   *cc\setSize(0.6)
+  *cc\enableTooltip(@getInfo())
   makeData(table)
   table\setSelectCallback(@fillFic())
   table\show()
@@ -218,7 +229,7 @@ DataSection
 EndDataSection
 
 ; IDE Options = PureBasic 5.72 LTS Beta 1 (Windows - x64)
-; CursorPosition = 162
-; FirstLine = 144
-; Folding = --+
+; CursorPosition = 128
+; FirstLine = 118
+; Folding = --0-
 ; EnableXP

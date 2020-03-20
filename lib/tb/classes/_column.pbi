@@ -102,8 +102,13 @@ Module _COLUMN
 	  EndWith
 	EndProcedure
 
-
-
+	;}
+  ;{ PUBLIC METHODS
+	Procedure enableTooltip(*this._members,*geter)
+	  With *this
+	    \tooltip = *geter
+	  EndWith
+	EndProcedure
 	;}
 	DataSection
 		S_MET:
@@ -115,12 +120,12 @@ Module _COLUMN
     Data.i @setFgColors()
     Data.i @getWidth()
     Data.i @setWidth()
-
+    Data.i @enableTooltip()
 		E_MET:
 	EndDataSection
 EndModule
 ; IDE Options = PureBasic 5.72 LTS Beta 1 (Windows - x64)
-; CursorPosition = 29
-; FirstLine = 17
-; Folding = ---
+; CursorPosition = 122
+; FirstLine = 98
+; Folding = ----
 ; EnableXP

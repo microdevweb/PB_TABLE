@@ -22,6 +22,7 @@ EndDeclareModule
 
 DeclareModule _COLUMN
   Prototype.s geter(*this,*data)
+  Prototype.s geterV(*this)
   Prototype seter(*this,*line,x)
   Prototype _draw(*this,x,y,*parent)
 	Structure _members
@@ -37,6 +38,7 @@ DeclareModule _COLUMN
 	  *data
 	  *parent
 	  image.b
+	  tooltip.geterV ; for activate the tooltip
 	EndStructure
 	Declare _super(*this._members,*s_daughter,*E_daughter)
 	Macro super()
@@ -163,6 +165,10 @@ DeclareModule _TABLE
 	  List *myData()
 	  *current
 	  *selectCallback.callback
+	  toolTipId.l
+	  canvasToolTip.l
+	  toolTipColors._TB::_colors
+	  toolTipFont.l
 	EndStructure
 	Declare _super(*this._members,*s_daughter,*E_daughter)
 	Macro super()
@@ -195,7 +201,7 @@ EndModule
 
 
 ; IDE Options = PureBasic 5.72 LTS Beta 1 (Windows - x64)
-; CursorPosition = 74
-; FirstLine = 45
-; Folding = Zf--6-
+; CursorPosition = 180
+; FirstLine = 70
+; Folding = Ye338-
 ; EnableXP

@@ -32,9 +32,15 @@ DeclareModule TB
     lineFont.l
     selectedFont.l
   EndStructure
+  Structure _toolTip
+    bgColor.l
+    fgColor.l
+    font.l
+  EndStructure
   Global defaultColors._default_colors
   Global defaultSize._size
   Global defaultFont._font
+  Global defaultTooltip._toolTip
   Interface table
     getTitle.s()
     setTitle(title.s)
@@ -90,6 +96,7 @@ DeclareModule TB
     setFgColors(color)
     getWidth.d()
     setWidth(width.d)
+    enableTooltip(geter)
   EndInterface
   Interface stringColumn Extends _column
     getGeter()
@@ -155,6 +162,11 @@ Module TB
     \lineFont = LoadFont(#PB_Any,"arial",10,#PB_Font_HighQuality)
     \selectedFont = LoadFont(#PB_Any,"arial",11,#PB_Font_HighQuality|#PB_Font_Bold)
   EndWith
+  With defaultTooltip
+    \bgColor = $FF5C5C5C
+    \fgColor = $FFFFFFFF
+    \font = LoadFont(#PB_Any,"arial",11,#PB_Font_HighQuality|#PB_Font_Italic)
+  EndWith
   Procedure newTable(container)
     ProcedureReturn _TABLE::new(container)
   EndProcedure
@@ -176,7 +188,7 @@ Module TB
 EndModule
 XIncludeFile "../../lib/tb/_tb_classes.pbi"
 ; IDE Options = PureBasic 5.72 LTS Beta 1 (Windows - x64)
-; CursorPosition = 76
-; FirstLine = 45
-; Folding = 6-
+; CursorPosition = 165
+; FirstLine = 143
+; Folding = 6--
 ; EnableXP

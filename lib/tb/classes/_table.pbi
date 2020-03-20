@@ -53,6 +53,9 @@ Module _TABLE
 			\selectedLineFont = TB::defaultFont\selectedFont
 			\container = container
 			\columnTitleHeight = TB::defaultSize\column_height
+			\toolTipColors\bg = TB::defaultTooltip\bgColor
+			\toolTipColors\fg = TB::defaultTooltip\fgColor
+			\toolTipFont = TB::defaultTooltip\font
 			Protected w = GadgetWidth(\container),
 			         h = GadgetHeight(\container)
 			w = _TB::dpiX(w)
@@ -131,12 +134,57 @@ Module _TABLE
 	  EndWith
 	EndProcedure
 	
+	Procedure showTooltip(*this._members,*column._COLUMN::_members,*data,mx,my)
+	  With *this
+	    Protected wc.d = GadgetWidth(\container) * *column\width,
+	              xf = WindowX(EventWindow())+GadgetX(\container)+mx+20,
+	              yf = WindowY(EventWindow())+GadgetY(\container)+my,
+	              w = 200,h = 200,
+	              flags = #PB_Window_BorderLess|#PB_Window_Invisible,
+	              text.s = *column\tooltip(*data)
+	    ; only if message
+	    Protected mesage.s = *column\tooltip(*data)
+	    If Len(mesage)
+	      If Not \toolTipId
+	        \toolTipId = OpenWindow(#PB_Any,xf,yf,w,h,"",flags,WindowID(EventWindow()))
+	        \canvasToolTip = CanvasGadget(#PB_Any,0,0,w,h)
+	      EndIf
+	      StartVectorDrawing(CanvasVectorOutput(\canvasToolTip))
+	      VectorFont(FontID(\toolTipFont))
+	      h = VectorTextHeight(text) + 20
+	      w = VectorTextWidth(text) + 20
+	      StopVectorDrawing()
+	      ResizeWindow(\toolTipId,xf,yf,w,h)
+	      ResizeGadget(\canvasToolTip,0,0,w,h)
+	      StartVectorDrawing(CanvasVectorOutput(\canvasToolTip))
+	      VectorSourceColor(\toolTipColors\bg)
+	      FillVectorOutput()
+	      VectorSourceColor(\toolTipColors\fg)
+	      VectorFont(FontID(\toolTipFont))
+	      MovePathCursor(10,10)
+	      DrawVectorParagraph(text,w,h)
+	      StopVectorDrawing()
+	      HideWindow(\toolTipId,#False)
+	    Else
+	      If \toolTipId And IsWindow(\toolTipId)
+	        HideWindow(\toolTipId,#True)
+	      EndIf
+	    EndIf
+	    SetActiveWindow(EventWindow())
+	  EndWith
+	EndProcedure
+	
 	Procedure eventCanvas()
 	  Protected *this._members = GetGadgetData(EventGadget())
 	  With *this
 	    Static mx,my
 	    Static *line._LINE::_members,*column._COLUMN::_members
+	    Protected cx
 	    Select EventType()
+	      Case #PB_EventType_MouseLeave
+	        If \toolTipId And IsWindow(\toolTipId)
+	          HideWindow(\toolTipId,#True)
+	        EndIf
 	      Case #PB_EventType_MouseEnter
 	        SetActiveGadget(\idCanvas)
 	      Case #PB_EventType_MouseMove
@@ -146,6 +194,14 @@ Module _TABLE
 	        *line = onALine(*this,my)
 	        If *line
 	          SetGadgetAttribute(\idCanvas,#PB_Canvas_Cursor,#PB_Cursor_Hand)
+	          *column = onAColumn(*this,mx,@cx)
+	          If *column And *line\data And *column\tooltip
+	            showTooltip(*this,*column,*line\data,mx,my)
+	          Else
+	            If \toolTipId And IsWindow(\toolTipId)
+	              HideWindow(\toolTipId,#True)
+	            EndIf
+	          EndIf
 	          ProcedureReturn 
 	        EndIf
 	        SetGadgetAttribute(\idCanvas,#PB_Canvas_Cursor,#PB_Cursor_Default)
@@ -163,7 +219,6 @@ Module _TABLE
 	          \current = *line\data
 	          refreshLine(*this)
 	          draw(*this)
-	          Protected cx
 	          *column = onAColumn(*this,mx,@cx)
 	          If *column
 	            If *column\_seter
@@ -665,7 +720,7 @@ Module _TABLE
 	EndDataSection
 EndModule
 ; IDE Options = PureBasic 5.72 LTS Beta 1 (Windows - x64)
-; CursorPosition = 656
-; FirstLine = 197
-; Folding = CAAgA7---A9
+; CursorPosition = 172
+; FirstLine = 37
+; Folding = iwAAB1---L5
 ; EnableXP
