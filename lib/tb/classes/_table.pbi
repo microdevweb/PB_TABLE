@@ -363,6 +363,7 @@ Module _TABLE
 	  With *this
 	    Protected w = GadgetWidth(\idCanvas),
 	              wt
+	    w = _TB::dpiX(w)
 	    ForEach \myColumns()
 	      wt + w * \myColumns()\width
 	    Next
@@ -370,10 +371,12 @@ Module _TABLE
 	      SetGadgetAttribute(\scrollH,#PB_ScrollBar_Maximum,wt - w)
 	      HideGadget(\scrollH,#False)
 	      \scrollHOn = #True
+	      ResizeImage(\image,wt,#PB_Ignore)
 	    Else
 	      HideGadget(\scrollH,#True)
 	      \scrollHOn = #False
 	      SetGadgetState(\scrollH,0)
+	      ResizeImage(\image,w,#PB_Ignore)
 	    EndIf
 	  EndWith
 	EndProcedure
@@ -595,8 +598,43 @@ Module _TABLE
 	  EndWith
 	EndProcedure
 
+	
+	Procedure getBgTooltipColors(*this._members)
+	  With *this
+	    ProcedureReturn \toolTipColors\bg
+	  EndWith
+	EndProcedure
+	
+	Procedure setBgTooltipColors(*this._members,color)
+	  With *this
+	    \toolTipColors\bg = color
+	  EndWith
+	EndProcedure
 
-
+  Procedure getFgTooltipColors(*this._members)
+	  With *this
+	    ProcedureReturn \selectedColors\fg
+	  EndWith
+	EndProcedure
+	
+	Procedure setFgTooltipColors(*this._members,color)
+	  With *this
+	    \toolTipColors\fg = color
+	  EndWith
+	EndProcedure
+	
+	Procedure getToolTipFont(*this._members)
+	  With *this
+	    ProcedureReturn \toolTipFont
+	  EndWith
+	EndProcedure
+	
+	Procedure setToolTipFont(*this._members,toolTipFont)
+	  With *this
+	    \toolTipFont = toolTipFont
+	  EndWith
+	EndProcedure
+	
 
 	;}
 	
@@ -666,8 +704,37 @@ Module _TABLE
 	    \selectCallback = *callback
 	  EndWith
 	EndProcedure
+	
+		;{-------------------------------------------
+	; METHOD     : resize
+	; PARAMETERS : 
+	; RETURN     : 
+	; PROCESS    : 
+	;}-------------------------------------------
+	Procedure resize(*this._members)
+		With *this
+		  Protected w = GadgetWidth(\container),
+		            h = GadgetHeight(\container),
+		            xsv,hsv,ysh,wsh
+			w = _TB::dpiX(w)
+			h = _TB::dpiY(h)
+			ResizeGadget(\idCanvas,#PB_Ignore,#PB_Ignore,w,h)
+			xsv = w - TB::defaultSize\scroll_size
+			hsv = h - TB::defaultSize\scroll_size
+			ysh = h - TB::defaultSize\scroll_size
+			wsh = w - TB::defaultSize\scroll_size
+			ResizeGadget(\scrollV,xsv,#PB_Ignore,#PB_Ignore,hsv)
+			ResizeGadget(\scrollH,#PB_Ignore,ysh,wsh,#PB_Ignore)
+			ResizeImage(\image,w,h)
+			show(*this)
+		EndWith
+	EndProcedure
 
+
+	
 	;}
+	
+	
 	
 	DataSection
 	  S_MET:
@@ -710,17 +777,26 @@ Module _TABLE
 
     Data.i @getColumnTitleHeight()
     Data.i @setColumnTitleHeight()
+    
+    Data.i @getBgTooltipColors()
+    Data.i @setBgTooltipColors()
+    Data.i @getFgTooltipColors()
+    Data.i @setFgTooltipColors()
+    
+    Data.i @getToolTipFont()
+    Data.i @setToolTipFont()
 
     
     Data.i @show()
     Data.i @addColumn()
     Data.i @addLine()
     Data.i @setSelectCallback()
+    Data.i @resize()
 		E_MET:
 	EndDataSection
 EndModule
 ; IDE Options = PureBasic 5.72 LTS Beta 1 (Windows - x64)
-; CursorPosition = 172
-; FirstLine = 37
-; Folding = iwAAB1---L5
+; CursorPosition = 727
+; FirstLine = 287
+; Folding = yA1KBk5JAgL5-
 ; EnableXP

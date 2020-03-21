@@ -82,10 +82,20 @@ DeclareModule TB
     getColumnTitleHeight()
     setColumnTitleHeight(height)
     
+    getBgTooltipColors(color)
+    setBgTooltipColors(color)
+    
+    getFgTooltipColors(color)
+    setFgTooltipColors(color)
+    
+    getToolTipFont()
+    setToolTipFont(font)
+    
     show()
     addColumn(column)
     addLine(lineData)
     setSelectCallback(callback)
+    resize()
   EndInterface
   Interface _column ; abstract class don't use it 
     getTitle()
@@ -188,7 +198,7 @@ Module TB
 EndModule
 XIncludeFile "../../lib/tb/_tb_classes.pbi"
 ; IDE Options = PureBasic 5.72 LTS Beta 1 (Windows - x64)
-; CursorPosition = 165
-; FirstLine = 143
+; CursorPosition = 97
+; FirstLine = 55
 ; Folding = 6--
 ; EnableXP

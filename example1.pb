@@ -24,7 +24,8 @@ EndStructure
 Global NewList myPeople.person(),
                img_warning = CatchImage(#PB_Any,?war),
                img_phone = CatchImage(#PB_Any,?phone),  
-               img_busnes = CatchImage(#PB_Any,?bus)
+               img_busnes = CatchImage(#PB_Any,?bus),
+               table.TB::table
 
 
 Procedure.s getFirstName(*this.person)
@@ -166,11 +167,18 @@ Procedure fillFic(*this.person)
   EndWith
 EndProcedure
 
+Procedure evSize()
+  Protected h = WindowHeight(#FORM) - 20
+  ResizeGadget(#CONTAINER,#PB_Ignore,#PB_Ignore,#PB_Ignore,h)
+  table\resize()
+EndProcedure
+
 Procedure start()
-  Protected table.TB::table,y = 10
+  Protected y = 10
   Protected *cs.TB::stringColumn,*ci.TB::integerColumn,*cf.TB::floatColumn,*cd.TB::doubleColumn,
-            *cc.TB::imageColumn
-  OpenWindow(#FORM,0,0,800,600,"Example version 1.0.b6",#PB_Window_ScreenCentered|#PB_Window_SystemMenu)
+            *cc.TB::imageColumn,
+            flags = #PB_Window_ScreenCentered|#PB_Window_SystemMenu|#PB_Window_SizeGadget|#PB_Window_MaximizeGadget|#PB_Window_MinimizeGadget
+  OpenWindow(#FORM,0,0,800,600,"Example version 1.1",flags)
   ContainerGadget(#CONTAINER,10,10,400,580)
   table = TB::newTable(#CONTAINER)
   table\setTitle("List of customer")
@@ -213,6 +221,7 @@ Procedure start()
   StringGadget(#ST_WEIGHT,10,y,GadgetWidth(#FIC) - 20,30,"")
   CloseGadgetList()
   BindEvent(#PB_Event_CloseWindow,@exit(),#FORM)
+  BindEvent(#PB_Event_SizeWindow,@evSize(),#FORM)
 EndProcedure
 
 start()
@@ -229,7 +238,7 @@ DataSection
 EndDataSection
 
 ; IDE Options = PureBasic 5.72 LTS Beta 1 (Windows - x64)
-; CursorPosition = 128
-; FirstLine = 118
-; Folding = --0-
+; CursorPosition = 180
+; FirstLine = 116
+; Folding = --x-
 ; EnableXP
